@@ -1,14 +1,22 @@
 'use srtict';
 
 var num = 33721;
-num *= num;
-console.log(num);
+let arr = [];
+let j = 0;
+let mult = 1;
+for(let i = 0; i < 5; i++){
+    arr[j] = num % 10;
+    num = Math.floor(num / 10);
+    mult = mult * arr[j];
+    j++;
+}
+console.log(mult);
 
-num = num ** 3;
+mult = mult ** 3;
 
-while (num>100){
-    num /= 10;
+while (mult > 100){
+    mult /= 10;
 }
 
-num = Math.floor(num);
-console.log(num);
+mult = Math.floor(mult);
+console.log(mult);

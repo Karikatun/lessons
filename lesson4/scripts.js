@@ -81,6 +81,7 @@ let appData = {
             }            
         } 
         appData.income.forEach(function(item, i){
+            item = item[0].toUpperCase() + item.substring(1);
             alert("Способы доп. заработка: " + (i + 1) + ". " + item);
         });        
     }    

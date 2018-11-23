@@ -18,35 +18,16 @@ addPointFive();
 
 // Восстановление порядка пунктов
 function sortItems() {
-    let ul = document.getElementsByTagName('ul'),
-        li = document.getElementsByTagName('li'),
-        sortArr = [];
-
-    for(var i = 0, l = li.length; i < l; i++){
-        sortArr.push(li[i].innerHTML);
-    }
-
-    let temp = sortArr[1];
-    sortArr[1] = sortArr[2];
-    sortArr[2] = temp;
-
-    for(let i = 0, l = li.length; i < l; i++){
-    li[i].innerHTML = sortArr[i];
-    }
+    let menu = document.querySelectorAll('.menu')[0],
+        menuItem = document.querySelectorAll('.menu-item');
+    menu.insertBefore(menuItem[2], menuItem[1]);
 }
 sortItems();
 
 //изменение заголовка
 function changeHeadline(){
-    let text = document.querySelector('#title'),
-        textArr = [],
-        textString;
-    
-    textArr.push(text.innerHTML);
-    textString = textArr[0].split(' ');
-    textString.splice(12,0,'подлинную');
-    textArr = textString.join(" ");
-    text.innerHTML = textArr;    
+    let title = document.querySelector('#title');
+    title.textContent = 'Мы продаем только подлинную технику Apple';
 }
 changeHeadline();
 

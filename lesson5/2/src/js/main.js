@@ -2,14 +2,7 @@
 
 
 let getStart = document.querySelector('.start'),
-    budget = document.querySelector('.budget-value'),
-    daybudget = document.querySelector('.daybudget-value'),
-    level = document.querySelector('.level-value'),
-    expenses = document.querySelector('.expenses-value'),    
-    optionalexpenses = document.querySelector('.optionalexpenses-value'),
-    income = document.querySelector('.income-value'),
-    monthsavings = document.querySelector('.monthsavings-value'),
-    yearsavings = document.querySelector('.yearsavings-value'),
+    elemantsValue = document.querySelector('.budget-value, .daybudget-value, .level-value, .expenses-value, .optionalexpenses-value, .income-value, .monthsavings-value, .yearsavings-value'),
 
     expensesInput = document.querySelectorAll('.expenses-item'),
 

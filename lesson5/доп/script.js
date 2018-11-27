@@ -5,8 +5,7 @@ function dateNow() {
         Day = Data.getDate(),
         Hour = Data.getHours(),
         Minutes = Data.getMinutes(),
-        Seconds = Data.getSeconds(),
-        date = new Date();
+        Seconds = Data.getSeconds();
     if (Hour < 10) {
         Hour = '0' + Hour;
     }
@@ -23,13 +22,13 @@ function dateNow() {
         Month = '0' + Month;
     }
 
-    function getWeekDay(date) {
+    function getWeekDay(Data) {
         let days = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
 
-        return days[date.getDay()];
+        return days[Data.getDay()];
     }
 
-    document.writeln(`${Hour}:${Minutes}:${Seconds} ${Day}.${Month + 1}.${Year} ${getWeekDay(date)}`);
+    document.writeln(`${Hour}:${Minutes}:${Seconds} ${Day}.${Month + 1}.${Year} ${getWeekDay(Data)}`);
 }
 dateNow();
 

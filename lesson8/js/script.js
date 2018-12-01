@@ -91,7 +91,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     let anchorlinks = document.querySelectorAll('a[href^="#"]');
 
-    for (let item of anchorlinks) { // relitere 
+    for (let item of anchorlinks) { 
         item.addEventListener('click', (e) => {
             e.preventDefault();
             let hashval = item.getAttribute('href');

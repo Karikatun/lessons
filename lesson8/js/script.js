@@ -1,11 +1,11 @@
-window.addEventListener('DOMContentLoaded', function(){
+window.addEventListener('DOMContentLoaded', function () {
 
     let tab = document.querySelectorAll('.info-header-tab'),
         info = document.querySelectorAll('.info-header')[0],
         tabContent = document.querySelectorAll('.info-tabcontent');
-    
+
     function hideContent(a) {
-        for (let i = a; i < tabContent.length; i++){
+        for (let i = a; i < tabContent.length; i++) {
             tabContent[i].classList.remove('show');
             tabContent[i].classList.add('hide');
         }
@@ -13,17 +13,17 @@ window.addEventListener('DOMContentLoaded', function(){
     hideContent(1);
 
     function showContent(b) {
-        if (tabContent[b].classList.contains('hide')){
+        if (tabContent[b].classList.contains('hide')) {
             tabContent[b].classList.remove('hide');
             tabContent[b].classList.add('show');
         }
     }
 
-    info.addEventListener('click', function(event){
+    info.addEventListener('click', function (event) {
         let target = event.target;
-        if (target && target.classList.contains('info-header-tab')){
-            for (let i = 0; i < tab.length; i++){
-                if (target == tab[i]){
+        if (target && target.classList.contains('info-header-tab')) {
+            for (let i = 0; i < tab.length; i++) {
+                if (target == tab[i]) {
                     hideContent(0);
                     showContent(i);
                     break;
@@ -35,29 +35,29 @@ window.addEventListener('DOMContentLoaded', function(){
 
     let deadLine = '2018-12-01';
 
-    function getTimeRemaning(endTime){
+    function getTimeRemaning(endTime) {
         let diff = Date.parse(endTime) - Date.parse(new Date()),
-            seconds = Math.floor((diff/1000) % 60),
-            minutes = Math.floor((diff/1000/60) % 60),
-            hours = Math.floor((diff/(1000*60*60)));
+            seconds = Math.floor((diff / 1000) % 60),
+            minutes = Math.floor((diff / 1000 / 60) % 60),
+            hours = Math.floor((diff / (1000 * 60 * 60)));
 
-            if (hours < 10){
-                hours = '0' + hours;
-            }
+        if (hours < 10) {
+            hours = '0' + hours;
+        }
 
-            if (minutes < 10){
-                minutes = '0' + minutes;
-            }
+        if (minutes < 10) {
+            minutes = '0' + minutes;
+        }
 
-            if (seconds < 10){
-                seconds = '0' + seconds;
-            }
+        if (seconds < 10) {
+            seconds = '0' + seconds;
+        }
 
         return {
-            'total' : diff,
-            'hours' : hours,
-            'minutes' : minutes,
-            'seconds' : seconds
+            'total': diff,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
         };
     }
 
@@ -75,9 +75,9 @@ window.addEventListener('DOMContentLoaded', function(){
             minutes.textContent = diff.minutes;
             seconds.textContent = diff.seconds;
 
-            
 
-            if (diff.total <= 0){
+
+            if (diff.total <= 0) {
                 clearInterval(timeInterval);
                 hours.textContent = '00';
                 minutes.textContent = '00';
@@ -87,4 +87,19 @@ window.addEventListener('DOMContentLoaded', function(){
     }
 
     setClock('timer', deadLine);
+
+
+    let anchorlinks = document.querySelectorAll('a[href^="#"]');
+
+    for (let item of anchorlinks) { // relitere 
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            let hashval = item.getAttribute('href');
+            let target = document.querySelector(hashval);
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    }
 });

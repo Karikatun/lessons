@@ -294,11 +294,9 @@ window.addEventListener('DOMContentLoaded', () => {
     totalValue.innerHTML = 0;
 
     function checkNum(input) {
-        input.addEventListener('keypress', (e) => {
-            if (e.keyCode < 48 || e.keyCode > 57) {
-                e.returnValue = false;
-            }
-        });
+        input.onkeyup = function(input) {
+            return this.value = this.value.replace(/\D/g, '')
+        }
     }
     checkNum(persons);
     checkNum(restDays);

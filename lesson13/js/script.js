@@ -156,28 +156,28 @@ window.addEventListener('DOMContentLoaded', () => {
                         } else if (request.readyState === 4) {
                             if (request.status == 200) {
                                 resolve();
-                            }else {
+                            } else {
                                 reject();
                             }
-                        } 
+                        }
                     };
                     request.send(data);
                 });
             }
 
-        function clearInput() {
-            for (let i = 0; i < input.length; i++) {
-                input[i].value = '';
+            function clearInput() {
+                for (let i = 0; i < input.length; i++) {
+                    input[i].value = '';
+                }
             }
-        }
 
-        postData(formData)
-            .then(() => statusMessage.textContent = message.loading)
-            .then(() => statusMessage.textContent = message.succsess)
-            .catch(() => statusMessage.textContent = message.failure)
-            .then(clearInput);
+            postData(formData)
+                .then(() => statusMessage.textContent = message.loading)
+                .then(() => statusMessage.textContent = message.succsess)
+                .catch(() => statusMessage.textContent = message.failure)
+                .then(clearInput);
 
-        });        
+        });
     });
 
 
@@ -236,6 +236,8 @@ window.addEventListener('DOMContentLoaded', () => {
         dotsWrap = document.querySelector('.slider-dots'),
         dots = document.querySelectorAll('.dot');
 
+    showSlides(slideIndex);
+    
     function showSlides(n) {
 
         if (n > slides.length) {
@@ -271,8 +273,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     dotsWrap.addEventListener('click', (event) => {
-        for (let i = 0; i < dots.length + 1; i++){
-            if (event.target.classList.contains('dot') && event.target == dots[i-1]){
+        for (let i = 0; i < dots.length + 1; i++) {
+            if (event.target.classList.contains('dot') && event.target == dots[i - 1]) {
                 currentSlide(i);
             }
         }
@@ -285,35 +287,44 @@ window.addEventListener('DOMContentLoaded', () => {
         place = document.getElementById('select'),
         totalValue = document.getElementById('total'),
         placeVal = document.querySelector('#select').options[0].value,
-        reg = /[^0-9]/g,
+        reg = /\D/g,
         personsSum = 0,
         daysSum = 0,
         total = 0;
 
-        totalValue.innerHTML = 0;
+    totalValue.innerHTML = 0;
 
-        function sum(){
-            if (restDays.value == '' || persons.value == '' || !(restDays.value.match(reg)) || !(restDays.value.match(reg))) {
-                totalValue.innerHTML = 0;
-            } else {
-                total = (daysSum + personsSum) * 4000 * placeVal;
-                totalValue.innerHTML = total;
-            }
+    function checkNum(input) {
+        input.addEventListener('keypress', (e) => {
+            if (reg.test(e.value)) e.returnValue= false;
+          });
+    }
+    checkNum(persons);
+    checkNum(restDays);
+
+    function sum() {
+        if (restDays.value == '' || persons.value == '') {
+            totalValue.innerHTML = 0;
+        } else {
+            total = (daysSum + personsSum) * 4000 * placeVal;
+            totalValue.innerHTML = total;
         }
+    }
 
-        persons.addEventListener('change', function(){
-            personsSum = +this.value;
-            sum();
-        });
+    persons.addEventListener('change', function () {
+        personsSum = +this.value;
+        sum();
 
-        restDays.addEventListener('change', function(){
-            daysSum = +this.value;
-            sum();
-        });
+    });
 
-        place.addEventListener('change', function() {
-            placeVal = this.options[this.selectedIndex].value;
-            sum();
-        }); // end Calc
+    restDays.addEventListener('change', function () {
+        daysSum = +this.value;
+        sum();
+    });
+
+    place.addEventListener('change', function () {
+        placeVal = this.options[this.selectedIndex].value;
+        sum();
+    }); // end Calc
 
 });

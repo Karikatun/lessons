@@ -237,7 +237,7 @@ window.addEventListener('DOMContentLoaded', () => {
         dots = document.querySelectorAll('.dot');
 
     showSlides(slideIndex);
-    
+
     function showSlides(n) {
 
         if (n > slides.length) {
@@ -287,7 +287,6 @@ window.addEventListener('DOMContentLoaded', () => {
         place = document.getElementById('select'),
         totalValue = document.getElementById('total'),
         placeVal = document.querySelector('#select').options[0].value,
-        reg = /\D/g,
         personsSum = 0,
         daysSum = 0,
         total = 0;
@@ -296,8 +295,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function checkNum(input) {
         input.addEventListener('keypress', (e) => {
-            if (reg.test(e.value)) e.returnValue= false;
-          });
+            if (e.keyCode < 48 || e.keyCode > 57) {
+                e.returnValue = false;
+            }
+        });
     }
     checkNum(persons);
     checkNum(restDays);

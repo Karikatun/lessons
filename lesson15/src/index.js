@@ -2,13 +2,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
     'use strict';
 
-    let tabs = require('./parts/tabs.js'),
-        reverseTimer = require('./parts/reverse_timer.js'),
-        slider = require('./parts/slider.js'),
-        descriptionModal = require('./parts/descriptionModal.js'),
-        ancorLinks = require('./parts/anchorlinks.js'),
-        form = require('./parts/form.js'),
-        calc = require('./parts/calc.js');
+    let tabs = require('./parts/tabs'),
+        reverseTimer = require('./parts/reverse_timer'),
+        slider = require('./parts/slider'),
+        descriptionModal = require('./parts/descriptionModal'),
+        ancorLinks = require('./parts/anchorlinks'),
+        form = require('./parts/form'),
+        calc = require('./parts/calc');
 
     tabs();
     reverseTimer();

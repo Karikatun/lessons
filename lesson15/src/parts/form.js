@@ -1,7 +1,8 @@
 function form() {
-    let form = document.querySelectorAll('.main-form, #form');
+    let popUpForm = document.querySelectorAll('.main-form'),
+        footerForm = document.querySelectorAll('#form');
 
-    form.forEach(function (item) {
+    function sendForm(item) {
         let message = {
             loading: 'Загрузка...',
             succsess: 'Спасибо! Скоро мы с вами свяжемся!',
@@ -15,7 +16,15 @@ function form() {
         item.addEventListener('submit', function (e) {
             e.preventDefault();
             item.appendChild(statusMessage);
-            let formData = new FormData(item);
+
+            let formData = new FormData(item),
+                obj = {};
+
+            formData.forEach(function (value, key) {
+                obj[key] = value;
+            });
+
+            let json = JSON.stringify(obj);
 
             function postData(data) {
                 return new Promise((resolve, reject) => {
@@ -26,13 +35,12 @@ function form() {
                     request.onreadystatechange = () => {
                         if (request.readyState < 4) {
                             resolve();
-                        } else if (request.readyState === 4) {
-                            if (request.status == 200) {
-                                resolve();
-                            } else {
-                                reject();
-                            }
+                        } else if (request.readyState === 4 && request.status == 200) {
+                            resolve();
+                        } else {
+                            reject();
                         }
+
                     };
                     request.send(data);
                 });
@@ -42,16 +50,21 @@ function form() {
                 for (let i = 0; i < input.length; i++) {
                     input[i].value = '';
                 }
+                setTimeout(function () {
+                    statusMessage.textContent = '';
+                }, 3000);
             }
 
-            postData(formData)
+            postData(json)
                 .then(() => statusMessage.textContent = message.loading)
                 .then(() => statusMessage.textContent = message.succsess)
                 .catch(() => statusMessage.textContent = message.failure)
                 .then(clearInput);
 
         });
-    });
+    }
+    sendForm(popUpForm);
+    sendForm(footerForm);
 
 
 

@@ -6,7 +6,7 @@ function reverseTimer() {
         let diff = Date.parse(endTime) - Date.parse(new Date()),
             seconds = Math.floor((diff / 1000) % 60),
             minutes = Math.floor((diff / 1000 / 60) % 60),
-            hours = Math.floor((diff / (1000 * 60 * 60)));
+            hours = Math.floor((diff / (1000 * 60 * 60))) + new Date().getTimezoneOffset() / 60;
 
         function addZero(num) {
             if (num < 10) {

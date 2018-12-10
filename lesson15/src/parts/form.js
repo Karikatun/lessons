@@ -1,23 +1,21 @@
 function form() {
-    let popUpForm = document.querySelectorAll('.main-form'),
-        footerForm = document.querySelectorAll('#form');
+    let form = document.querySelectorAll('.main-form, #form');
 
-    function sendForm(item) {
+    form.forEach(function (form) {
         let message = {
             loading: 'Загрузка...',
             succsess: 'Спасибо! Скоро мы с вами свяжемся!',
             failure: 'Что-то пошло не так...'
         };
 
-        let input = item.getElementsByTagName('input'),
+        let input = form.getElementsByTagName('input'),
             statusMessage = document.createElement('div');
         statusMessage.classList.add('status', 'fade');
 
-        item.addEventListener('submit', function (e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
-            item.appendChild(statusMessage);
-
-            let formData = new FormData(item),
+            form.appendChild(statusMessage);
+            let formData = new FormData(form),
                 obj = {};
 
             formData.forEach(function (value, key) {
@@ -35,12 +33,13 @@ function form() {
                     request.onreadystatechange = () => {
                         if (request.readyState < 4) {
                             resolve();
-                        } else if (request.readyState === 4 && request.status == 200) {
-                            resolve();
-                        } else {
-                            reject();
+                        } else if (request.readyState === 4) {
+                            if (request.status == 200) {
+                                resolve();
+                            } else {
+                                reject();
+                            }
                         }
-
                     };
                     request.send(data);
                 });
@@ -51,20 +50,18 @@ function form() {
                     input[i].value = '';
                 }
                 setTimeout(function () {
-                    statusMessage.textContent = '';
+                    statusMessage.innerHTML = '';
                 }, 3000);
             }
-
+            
             postData(json)
-                .then(() => statusMessage.textContent = message.loading)
-                .then(() => statusMessage.textContent = message.succsess)
-                .catch(() => statusMessage.textContent = message.failure)
+                .then(() => statusMessage.innerHTML = message.loading)
+                .then(() => statusMessage.innerHTML = message.succsess)
+                .catch(() => statusMessage.innerHTML = message.failure)
                 .then(clearInput);
 
         });
-    }
-    sendForm(popUpForm);
-    sendForm(footerForm);
+    });
 
 
 
